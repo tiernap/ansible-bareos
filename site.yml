@@ -1,0 +1,20 @@
+---
+- hosts: director:clients:storage
+  user: root
+  
+
+- hosts: director
+  user: root
+  roles:
+    - bareos-dir
+
+- hosts: clients
+  user: root
+  roles:
+    - bareos-client
+
+- hosts: storage
+  user: root
+  roles:
+    - bareos-storage
+

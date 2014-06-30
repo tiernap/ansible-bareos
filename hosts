@@ -1,0 +1,12 @@
+[director]
+#only one host here
+#192.168.10.10
+
+[storage]
+#only one host here
+#192.168.10.11
+
+[clients]
+#192.168.10.11
+#192.168.10.12
+#192.168.10.13

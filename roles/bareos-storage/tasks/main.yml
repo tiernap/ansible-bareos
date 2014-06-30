@@ -1,0 +1,22 @@
+---
+- name: Add bareos key
+  apt_key: url="http://download.bareos.org/bareos/release/{{ bareos_version }}/xUbuntu_12.04/Release.key" state=present
+
+- name: Add bareos repo
+  apt_repository: repo="deb http://download.bareos.org/bareos/release/{{ bareos_version }}/xUbuntu_12.04/ /" state=present
+  
+- name: Install Packages
+  apt: name=$item state=present update_cache=yes
+  with_items:
+    - bareos-storage
+
+- name: Create storage location
+  file: path={{ storage_location }} owner=bareos group=bareos  mode=0770 state=directory
+
+- name: Configure bareos storage
+  template: src=bareos-sd.conf dest=/etc/bareos/bareos-sd.conf mode=0640 owner=bareos group=bareos
+  notify: reload bareos-sd
+  
+- name: Enable bareos storage service
+  action: service name=bareos-sd state=started enabled=yes
+

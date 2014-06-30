@@ -1,0 +1,19 @@
+---
+- name: Add bareos key
+  apt_key: url="http://download.bareos.org/bareos/release/{{ bareos_version }}/xUbuntu_12.04/Release.key" state=present
+
+- name: Add bareos repo
+  apt_repository: repo="deb http://download.bareos.org/bareos/release/{{ bareos_version }}/xUbuntu_12.04/ /" state=present
+  
+- name: Install Packages
+  apt: name=$item state=present update_cache=yes
+  with_items:
+    - bareos-client
+
+- name: Configure bareos client
+  template: src=bareos-fd.conf dest=/etc/bareos/bareos-fd.conf mode=0640 owner=bareos group=bareos
+  notify: reload bareos-client
+  
+- name: Enable bareos client service
+  action: service name=bareos-fd state=started enabled=yes
+

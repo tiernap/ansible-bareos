@@ -1,0 +1,7 @@
+bareos_version: latest
+director_password: CHANGEME1
+client_password: CHANGEME2
+storage_password: CHANGEME3
+restricted_console_password: CHANGEME4
+storage_location: /var/lib/bareos/storage
+
