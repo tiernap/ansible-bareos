@@ -15,7 +15,7 @@
 
 - name: Configure bareos storage
   template: src=bareos-sd.conf dest=/etc/bareos/bareos-sd.conf mode=0640 owner=bareos group=bareos
-  notify: reload bareos-sd
+  notify: reload bareos-storage
   
 - name: Enable bareos storage service
   action: service name=bareos-sd state=started enabled=yes
