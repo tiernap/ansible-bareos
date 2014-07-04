@@ -1,7 +1,8 @@
 ---
 - hosts: director:clients:storage
   user: root
-  
+  roles:
+    - common
 
 - hosts: director
   user: root
