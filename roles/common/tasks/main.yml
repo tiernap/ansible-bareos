@@ -1,0 +1,6 @@
+---
+- name: add bareos key
+  apt_key: url="http://download.bareos.org/bareos/release/{{ bareos_version }}/xUbuntu_12.04/Release.key" state=present
+
+- name: add bareos repo
+  apt_repository: repo="deb http://download.bareos.org/bareos/release/{{ bareos_version }}/xUbuntu_12.04/ /" state=present
